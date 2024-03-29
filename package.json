@@ -1,6 +1,6 @@
 {
 	"name": "@browserfs/core",
-	"version": "0.1.0",
+	"version": "0.1.1-iontach",
 	"description": "A filesystem in your browser",
 	"main": "dist/index.js",
 	"types": "dist",
@@ -10,22 +10,26 @@
 		"storage"
 	],
 	"type": "module",
-	"homepage": "https://github.com/browser-fs/core",
+	"homepage": "https://github.com/saoirse-iontach/browser-fs-core",
 	"author": "John Vilk <jvilk@cs.umass.edu>",
 	"contributors": [
 		{
 			"name": "dr-vortex",
 			"email": "jp@drvortex.dev",
 			"url": "https://drvortex.dev"
+		},
+		{
+			"name": "saoirse-iontach",
+			"url": "https://github.com/saoirse-iontach"
 		}
 	],
 	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/browser-fs/core.git"
+		"url": "git+https://github.com/saoirse-iontach/browser-fs-core.git"
 	},
 	"bugs": {
-		"url": "https://github.com/browser-fs/core/issues"
+		"url": "https://github.com/saoirse-iontach/browser-fs-core/issues"
 	},
 	"engines": {
 		"node": ">= 18"
