@@ -6,11 +6,8 @@ import { ErrorCode, ApiError } from './ApiError.js';
 import * as path from './emulation/path.js';
 import { Cred } from './cred.js';
 import type { BaseBackendConstructor } from './backends/backend.js';
-import type { TextEncoder, TextDecoder } from 'node:util';
 
 declare const globalThis: {
-	TextEncoder: typeof TextEncoder;
-	TextDecoder: typeof TextDecoder;
 	setImmediate?: (callback: () => unknown) => void;
 };
 
@@ -244,25 +241,92 @@ export const setImmediate = typeof globalThis.setImmediate == 'function' ? globa
  */
 export const ROOT_NODE_ID: string = '/';
 
-/**
- * @internal
- * Used for caching text decoders
- */
-
-const decoderCache: Map<string, TextDecoder['decode']> = new Map();
-
-const textEncoder = new globalThis.TextEncoder();
-
-export function encode(input: string, encoding = 'utf8'): Uint8Array {
-	return textEncoder.encode(input);
+export function encode(
+    string?: string,
+    encoding: BufferEncoding|'utf-16le' = 'utf8'
+): Uint8Array
+{
+	let input = string || "";
+    switch(encoding){
+        default:
+        case 'utf8':
+        case 'utf-8':
+            return new TextEncoder().encode(input);
+    
+        case 'utf16le':
+        case 'utf-16le':
+        case 'ucs2':
+        case 'ucs-2':
+            return new Uint8Array(Uint16Array.from(
+                input.split(''), (c: string)=> c.charCodeAt(0)
+            ).buffer);
+    
+        case 'ascii':
+        case 'latin1':
+        case 'binary':
+            return Uint8Array.from(
+                input.split(''), (c: string)=> c.charCodeAt(0)
+            );
+    
+        case 'hex':
+            return Uint8Array.from(
+                input.match(/../g), (s: string)=> parseInt(s, 16)
+            );
+    
+        case 'base64':
+        case 'base64url':
+            input = input.replaceAll('-','+').replaceAll('_','/')
+            return Uint8Array.from(
+                atob(input).split(''), (c)=> c.charCodeAt(0)
+            );
+    }
 }
 
-export function decode(input?: NodeJS.ArrayBufferView | ArrayBuffer, encoding = 'utf8'): string {
-	if (!decoderCache.has(encoding)) {
-		const textDecoder = new globalThis.TextDecoder(encoding);
-		decoderCache.set(encoding, textDecoder.decode.bind(textDecoder));
-	}
-	return decoderCache.get(encoding)(input);
+export function decode(
+    data?: ArrayBufferView | ArrayBuffer,
+    encoding: BufferEncoding|'utf-16le' = 'utf8'
+): string
+{
+	if (!data || !data.byteLength) return "";
+	const input = new Uint8Array('buffer' in data ? data.buffer : data);
+    switch(encoding){
+        default:
+        case 'utf8':
+        case 'utf-8':
+            return new TextDecoder('utf-8').decode(input);
+    
+        case 'utf16le':
+        case 'utf-16le':
+        case 'ucs2':
+        case 'ucs-2':
+            return new TextDecoder('utf-16le').decode(input);
+    
+        case 'ascii':
+            return new TextDecoder('utf-8').decode(
+                input.map(i=> i & 127)
+            );
+    
+        case 'latin1':
+        case 'binary':
+            return new TextDecoder('utf-16').decode(
+                new Uint8Array(Uint16Array.from(input).buffer)
+            );
+    
+        case 'hex':
+            return Array.from(input,
+                (x)=> x.toString(16).padStart(2,'0')
+            ).join('');
+    
+        case 'base64':
+            return btoa(new TextDecoder('utf-16').decode(
+                new Uint8Array(Uint16Array.from(input).buffer)
+            ));
+        case 'base64url':
+            return btoa(new TextDecoder('utf-16').decode(
+                new Uint8Array(Uint16Array.from(input).buffer)
+            )).replaceAll('+','-').replaceAll('/','_').replaceAll('=','');
+    
+    }
 }
 
 /**
