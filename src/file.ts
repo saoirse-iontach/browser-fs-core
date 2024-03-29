@@ -1,7 +1,6 @@
 import { ApiError, ErrorCode } from './ApiError.js';
 import { Stats } from './stats.js';
 import { FileSystem } from './filesystem.js';
-import { getMount } from './emulation/shared.js';
 import { O_RDONLY, O_WRONLY, O_RDWR, O_CREAT, O_EXCL, O_TRUNC, O_APPEND, O_SYNC } from './emulation/constants.js';
 
 export enum ActionType {
@@ -515,7 +514,7 @@ export class PreloadFile<T extends FileSystem> extends BaseFile {
 	 */
 	public truncate(len: number): Promise<void> {
 		this.truncateSync(len);
-		if (this._flag.isSynchronous() && !getMount('/')!.metadata.synchronous) {
+		if (this._flag.isSynchronous() && !this._fs.metadata.synchronous) {
 			return this.sync();
 		}
 	}
@@ -534,7 +533,7 @@ export class PreloadFile<T extends FileSystem> extends BaseFile {
 			const buf = new Uint8Array(len - this._buffer.length);
 			// Write will set @_stat.size for us.
 			this.writeSync(buf, 0, buf.length, this._buffer.length);
-			if (this._flag.isSynchronous() && getMount('/')!.metadata.synchronous) {
+			if (this._flag.isSynchronous() && this._fs.metadata.synchronous) {
 				this.syncSync();
 			}
 			return;
@@ -542,7 +541,7 @@ export class PreloadFile<T extends FileSystem> extends BaseFile {
 		this._stat.size = len;
 		// Truncate buffer to 'len'.
 		this._buffer = this._buffer.subarray(0, len);
-		if (this._flag.isSynchronous() && getMount('/')!.metadata.synchronous) {
+		if (this._flag.isSynchronous() && this._fs.metadata.synchronous) {
 			this.syncSync();
 		}
 	}
