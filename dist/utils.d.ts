@@ -1,10 +1,16 @@
 /// <reference types="node" resolution-mode="require"/>
+/// <reference types="b2a" />
+/// <reference types="node" resolution-mode="require"/>
 /**
  * Grab bag of utility functions used across the code.
  */
 import { FileSystem } from './filesystem.js';
 import { Cred } from './cred.js';
 import type { BaseBackendConstructor } from './backends/backend.js';
+declare global {
+    export const TextEncoder: typeof import("util").TextEncoder, TextDecoder: typeof import("util").TextDecoder;
+    export const atob: typeof import("b2a").atob, btoa: typeof import("b2a").btoa;
+}
 /**
  * Synchronous recursive makedir.
  * @internal

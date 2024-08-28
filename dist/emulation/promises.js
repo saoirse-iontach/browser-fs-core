@@ -317,8 +317,14 @@ export async function symlink(srcpath, dstpath, type = 'file') {
     return doOp('symlink', false, srcpath, dstpath, type, cred);
 }
 export async function readlink(path, options) {
+    const encoding = typeof options == 'object' ? options.encoding : options;
     const value = await doOp('readlink', false, path, cred);
-    return encode(value, typeof options == 'object' ? options.encoding : options);
+    if (encoding === 'buffer') {
+        return encode(value);
+    }
+    else {
+        return value;
+    }
 }
 // PROPERTY OPERATIONS
 /**

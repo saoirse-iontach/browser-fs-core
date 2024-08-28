@@ -11,6 +11,7 @@ ca070ba816d05b25986501ebfd2639c1c4f5e72d Output tsc build errors
 a97178253d29d26f33e661b3e6f3ff220e8d8b82 Rollback to @types:14 because it is emulated fs api version
 c2169326fdaa2b6d28afdd6868dd2523f01c680a Fix emulation readlink as string or buffer
 7caed6bc717ec42b3844a111c645c6d9bfde3ae6 Simplify release scheme
+4beedc0d3ccd64d51418a353e5203ee26cf2a79e Add change log
 
 ___
 # <a id='v0.0.7'></a> (v0.0.7-iontach) Initial release

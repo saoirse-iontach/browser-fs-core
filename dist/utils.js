@@ -201,8 +201,9 @@ export const setImmediate = typeof globalThis.setImmediate == 'function' ? globa
  * @internal
  */
 export const ROOT_NODE_ID = '/';
+// prettier-ignore
 export function encode(string, encoding = 'utf8') {
-    let input = string || "";
+    let input = string || '';
     switch (encoding) {
         default:
         case 'utf8':
@@ -225,9 +226,10 @@ export function encode(string, encoding = 'utf8') {
             return Uint8Array.from(atob(input).split(''), (c) => c.charCodeAt(0));
     }
 }
+// prettier-ignore
 export function decode(data, encoding = 'utf8') {
     if (!data || !data.byteLength)
-        return "";
+        return '';
     const input = new Uint8Array('buffer' in data ? data.buffer : data);
     switch (encoding) {
         default:
@@ -245,7 +247,7 @@ export function decode(data, encoding = 'utf8') {
         case 'binary':
             return new TextDecoder('utf-16').decode(new Uint8Array(Uint16Array.from(input).buffer));
         case 'hex':
-            return Array.from(input, (x) => x.toString(16).padStart(2, '0')).join('');
+            return Array.from(input, i => i.toString(16).padStart(2, '0')).join('');
         case 'base64':
             return btoa(new TextDecoder('utf-16').decode(new Uint8Array(Uint16Array.from(input).buffer)));
         case 'base64url':

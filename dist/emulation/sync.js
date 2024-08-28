@@ -319,8 +319,14 @@ export function symlinkSync(srcpath, dstpath, type) {
 }
 symlinkSync;
 export function readlinkSync(path, options) {
+    const encoding = typeof options == 'object' ? options.encoding : options;
     const value = doOp('readlinkSync', false, path, cred);
-    return encode(value, typeof options == 'object' ? options.encoding : options);
+    if (encoding === 'buffer') {
+        return encode(value);
+    }
+    else {
+        return value;
+    }
 }
 readlinkSync;
 // PROPERTY OPERATIONS
