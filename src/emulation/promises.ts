@@ -460,8 +460,13 @@ export async function readlink(path: PathLike, options?: BaseEncodingOptions | B
 export async function readlink(path: PathLike, options: BufferEncodingOption): Promise<Uint8Array>;
 export async function readlink(path: PathLike, options?: BaseEncodingOptions | string): Promise<string | Uint8Array>;
 export async function readlink(path: PathLike, options?: BufferEncodingOption | BaseEncodingOptions | string): Promise<string | Uint8Array> {
+	const encoding = typeof options == 'object' ? options.encoding : options;
 	const value: string = await doOp('readlink', false, path, cred);
-	return encode(value, typeof options == 'object' ? options.encoding : options);
+	if (encoding === 'buffer') {
+		return encode(value);
+	} else {
+		return value;
+	}
 }
 
 // PROPERTY OPERATIONS

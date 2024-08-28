@@ -491,8 +491,13 @@ symlinkSync satisfies typeof Node.symlinkSync;
 export function readlinkSync(path: PathLike, options?: BufferEncodingOption): Uint8Array;
 export function readlinkSync(path: PathLike, options: BaseEncodingOptions | BufferEncoding): string;
 export function readlinkSync(path: PathLike, options?: BaseEncodingOptions | string | BufferEncodingOption): Uint8Array | string {
+	const encoding = typeof options == 'object' ? options.encoding : options;
 	const value: string = doOp('readlinkSync', false, path, cred);
-	return encode(value, typeof options == 'object' ? options.encoding : options);
+	if (encoding === 'buffer') {
+		return encode(value);
+	} else {
+		return value;
+	}
 }
 readlinkSync satisfies BufferToUint8Array<typeof Node.readlinkSync>;
 
