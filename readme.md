@@ -18,6 +18,25 @@
 > 
 > <sup>_dr-Vortext_ is an alias of _James P_</sup>
 
+### Versions
+
+<details><summary><i>versions details</i></summary>
+
+**@BrowserFS** and **@ZenFS** share the same repository:
+ - Versions `<=v0.4.0` are **@BrowserFS**
+ - Versions `>=v0.4.1` are **@ZenFS**
+
+Versions of this **@BrowserFS-iontach** fork:
+ | Iontach version | Description |
+ |-|-|
+ | `v0.1.0`         | Original **@BrowserFS** version |
+ | `v0.1.1-iontach` | Inital **Iontach** bugfix |
+ | `~v0.1.10`       | Newer **Iontach** bugfix |
+ | `semver:0.1`     | Simplified **Iontach** release scheme |
+</details>
+
+These `v0.1.x` versions emulate **node:fs** `v14.x.x`
+
 ### Citing
 
 BrowserFS is a component of the [Doppio](http://doppiojvm.org/) and [Browsix](https://browsix.org/) research projects from the PLASMA lab at the University of Massachusetts Amherst. If you decide to use BrowserFS in a project that leads to a publication, please cite the academic papers on [Doppio](https://dl.acm.org/citation.cfm?doid=2594291.2594293) and [Browsix](https://dl.acm.org/citation.cfm?id=3037727).
