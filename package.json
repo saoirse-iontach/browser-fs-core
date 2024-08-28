@@ -1,6 +1,6 @@
 {
 	"name": "@browserfs/core",
-	"version": "0.1.10",
+	"version": "0.1.11",
 	"description": "A filesystem in your browser",
 	"main": "dist/index.js",
 	"types": "dist",
@@ -56,7 +56,7 @@
 	"dependencies": {
 		"@types/b2a": "1.0.0",
 		"@types/node": "^14.0.0",
-		"@types/readable-stream": "^4.0.10",
+		"@types/readable-stream": "4.0.10",
 		"readable-stream": "^4.5.2"
 	},
 	"devDependencies": {

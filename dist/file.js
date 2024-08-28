@@ -443,7 +443,7 @@ export class PreloadFile extends BaseFile {
             return len;
         }
         this.setPos(position + len);
-        return len;
+        return length;
     }
     /**
      * Read data from the file.
@@ -484,10 +484,10 @@ export class PreloadFile extends BaseFile {
         if (endRead > this._stat.size) {
             length = this._stat.size - position;
         }
-        this._buffer.set(buffer.slice(offset, offset + length), position);
+        buffer.set(this._buffer.slice(offset, offset + length), position);
         this._stat.atimeMs = Date.now();
         this._pos = position + length;
-        return this._buffer.length;
+        return length;
     }
     /**
      * Asynchronous `fchmod`.
