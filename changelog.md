@@ -1,8 +1,8 @@
 # CHANGE LOG
 | | | |
 |-|-|-|
-| [v0.0.6](#v0.0.6) |  Original @<!-- -->BrowserFS version | 2024-02-27 |
-| [v0.0.7-iontach](#v0.0.7) | Inital Iontach bugfix (Storage Store) | 2024-04-02 |
+| [v0.1.0](#v0.1.0) |  Original @<!-- -->BrowserFS version | 2024-02-27 |
+| [v0.1.1-iontach](#v0.1.1) | Inital Iontach bugfix (Encoding Utils) | 2024-04-02 |
 | [v0.1.10](#v0.1.10) | Simplified Iontach release scheme | 2024-08-28 |
 | [v0.1.11](#v0.1.11) | Fixes PreloadFile reads | 2024-08-28 |
 
@@ -19,21 +19,20 @@ ___
 * [4beedc0](/../../commit/4beedc0d3ccd64d51418a353e5203ee26cf2a79e) Add change log
 
 ___
-# <a id='v0.0.7'></a> (v0.0.7-iontach) Initial release
+# <a id='v0.1.1'></a> (v0.1.1-iontach) Initial release
 
 ### What's Changed
-* [ec63690](/../../commit/ec636906490f502ee639e1c4ae534def22dd0b33) Update readme.md according to fork (and restoring citations)
-* [c179748](/../../commit/c179748a76bd7a71c3fbbf4677ac69e7ed76c54b) Update package.json preparing new version 0.0.7-iontach
-* [Issue 0](https://github.com/saoirse-iontach/browser-fs-dom/pull/1) - Add tests 
-* [Issue 1](https://github.com/saoirse-iontach/browser-fs-dom/pull/2) - Define core imports as externalGlobals
-* [Issue 2](https://github.com/saoirse-iontach/browser-fs-dom/pull/3) - Correct StorageStore encoding of binary to string
+* [c986dac](/../../commit/c986daceeed6ea52340e2cb3afa01386d9eaf992) Update readme.md according to fork (and restoring citations)
+* [161f3df](/../../commit/161f3df243804a11d66cea39c20e1960e61e3e09) Update package.json preparing new version 0.1.1-iontach
+* [12adf49](/../../commit/12adf49e69d1a35231ee601e2f826575463df2d3) Fix circular dependency between file.ts and shared.ts
+* [dc386c4](/../../commit/dc386c48b9397d3b90023340f120e91b8c657566) implement utils.ts encodings
+* [af22a5a](/../../commit/af22a5a258a65745f24c23f6a2fae63693e797d2) publish github package v0.1.1-iontach
 
 ### New Contributors
 * @saoirse-iontach
 
-**Full Changelog**: https://github.com/saoirse-iontach/browser-fs-dom/compare/v0.0.6...v0.0.7
-
+**Full Changelog**: https://github.com/saoirse-iontach/browser-fs-core/compare/v0.1.0...v0.1.1
 ___
-# <a id='v0.0.6'></a> (v0.0.6) Base release
+# <a id='v0.1.0'></a> (v0.1.0) Base release
 
-Zen-FS/dom#v0.0.6
+Zen-FS/core#v0.1.0
